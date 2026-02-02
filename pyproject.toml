@@ -1,0 +1,27 @@
+[project]
+name = "polyjitter"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Keiran Suchak", email = "ksuchak1990@yahoo.co.uk" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "geopandas>=1.1.2",
+    "numpy>=2.4.2",
+    "pandas>=3.0.0",
+    "shapely>=2.1.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.28,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "ruff>=0.14.14",
+]
