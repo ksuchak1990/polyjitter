@@ -1,5 +1,7 @@
 # `polyjitter`
 
+[![CI](https://github.com/ksuchak1990/polyjitter/actions/workflows/ci.yml/badge.svg)](https://github.com/ksuchak1990/polyjitter/actions/workflows/ci.yml)
+
 Uniformly jitter point geometries within polygon boundaries.
 
 `polyjitter` provides a small, deterministic utility for resampling point
