@@ -8,6 +8,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      UV_PYTHON: python3.12
 
     steps:
       - uses: actions/checkout@v4
@@ -21,9 +23,7 @@ jobs:
         run: pip install uv
 
       - name: Sync dependencies
-        run: |
-          export UV_PYTHON=python3.12
-          uv sync
+        run: uv sync
 
       - name: Lint
         run: uv run ruff check src tests
