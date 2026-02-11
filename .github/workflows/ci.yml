@@ -21,7 +21,9 @@ jobs:
         run: pip install uv
 
       - name: Sync dependencies
-        run: uv sync
+      - run: |
+          export UV_PYTHON=python3.12
+          uv sync
 
       - name: Lint
         run: uv run ruff check src tests
