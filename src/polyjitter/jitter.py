@@ -65,17 +65,12 @@ def jitter_points_within_polygons(
     *,
     seed: int | None = None,
 ) -> pd.Series:
-    """
-    Uniformly jitter point geometries within their containing polygons.
-
-    Each output point is sampled uniformly from the polygon that contains
-    the corresponding input point.
-
-    Points that do not fall within any polygon return None.
-    """
     _validate_inputs(points, polygons)
 
+    polygons = polygons.reset_index(drop=True)
+
     rng = np.random.default_rng(seed)
+
     point_to_polygon = _spatial_join(points, polygons)
 
     geoms = cast(list[Polygon], polygons.geometry.to_list())
@@ -83,17 +78,18 @@ def jitter_points_within_polygons(
 
     jittered = pd.Series(index=points.index, dtype=object)
 
-    for idx, poly_idx in point_to_polygon.items():
+    poly_idxs = point_to_polygon.to_numpy()
+
+    for i, poly_idx in enumerate(poly_idxs):
         if pd.isna(poly_idx):
-            jittered.loc[idx] = None  # type: ignore[call-overload]
+            jittered.iloc[i] = None
             continue
 
         triangles, probs = triangulations[int(poly_idx)]
-        point = random_point_in_polygon(
+        jittered.iloc[i] = random_point_in_polygon(
             triangles=triangles,
             probs=probs,
             rng=rng,
-        )  # type: ignore[call-overload]
-        jittered.loc[idx] = point  # type: ignore[call-overload]
+        )
 
     return jittered
