@@ -6,12 +6,12 @@ readme = "README.md"
 authors = [
     { name = "Keiran Suchak", email = "ksuchak1990@yahoo.co.uk" }
 ]
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 dependencies = [
     "geopandas>=1.1.2",
     "numpy>=2.4.2",
     "pandas>=3.0.0",
-    "shapely>=2.1.2",
+    "shapely<2.1.0",
 ]
 
 [build-system]
